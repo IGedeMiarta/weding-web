@@ -14,6 +14,10 @@ class Acara extends Model
         return $mempelai['pria']['name'] . ' & ' . $mempelai['wanita']['name'];
     }
 
+    public function user(){
+        return $this->belongsTo(User::class,'by_user');
+    }
+
     public function alamat(){
         $alamat = json_decode($this->alamat,true);
         return $alamat;

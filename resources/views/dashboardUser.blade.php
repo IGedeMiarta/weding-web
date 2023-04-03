@@ -2,82 +2,52 @@
 @section('content')
     <div class="row">
 
-        <div class="col-xl-3 col-md-6">
-            <div class="card-box">
-                <div class="dropdown float-right">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
-                    </div>
-                </div>
+        <div class="col-xl-6 col-md-12">
+            <div class="bg-picture card-box" style="min-height: 11rem">
+                <div class="profile-info-name">
+                    <img src="{{ auth()->user()->profilePic() }}"
+                        class="rounded-circle avatar-xl img-thumbnail float-left mr-3" alt="profile-image">
 
-                <h4 class="header-title mt-0 mb-3">Total Saldo</h4>
+                    <div class="profile-info-detail overflow-hidden">
+                        <h4 class="m-0">{{ $user->name }}</h4>
+                        <p class="text-muted"><i>{{ $user->username . ' | ' . $user->phone }}</i></p>
+                        {{-- <p class="font-13">Hi I'm Alexandra Clarkson,has been the industry's standard dummy text ever since
+                            the 1500s, when an unknown printer took a galley of type.Contrary to popular belief, Lorem Ipsum
+                            is not simply random text. It has roots in a piece of classical Latin literature it over 2000
+                            years to popular belief Ipsum is not simplyrandom text.</p> --}}
 
-                <div class="widget-box-2">
-                    <div class="widget-detail-2 text-right">
-                        {{-- <span class="badge badge-success badge-pill float-left mt-3">32% <i class="mdi mdi-trending-up"></i>
-                        </span> --}}
-                        <h2 class="font-weight-normal mb-1">{{ rp($total['saldo']) }} </h2>
-                        <p class="text-muted mb-3">Total Saldo All User</p>
-                    </div>
-                    <div class="progress progress-bar-alt-info progress-sm">
-                        {{-- <div class="progress-bar bg-success" role="progressbar" aria-valuenow="77" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 77%;">
-                            <span class="sr-only">77% Complete</span>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
+                        <ul class="social-list list-inline mt-3 mb-0">
+                            @if (auth()->user()->id == 1)
+                                <li class="list-inline-item">
+                                    <form action="{{ route('login') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="username" value="{{ $user->username }}">
+                                        <input type="hidden" name="password" value="{{ $user->phone }}">
+                                        <button type="submit" class="social-list-item border-secondary text-secondary"><i
+                                                class="mdi mdi-login"></i></button>
+                                    </form>
+                                </li>
+                            @endif
+                            <li class="list-inline-item">
+                                <a href="javascript: void(0);" class="social-list-item border-purple text-purple"><i
+                                        class="mdi mdi-facebook"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i
+                                        class="mdi mdi-instagram"></i></a>
+                            </li>
+                            <li class="list-inline-item">
+                                <a href="javascript: void(0);" class="social-list-item border-info text-info"><i
+                                        class="mdi mdi-twitter"></i></a>
+                            </li>
+                        </ul>
 
-        </div><!-- end col -->
-        <div class="col-xl-3 col-md-6">
-            <div class="card-box">
-                <div class="dropdown float-right">
-                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown"
-                        aria-expanded="false">
-                        <i class="mdi mdi-dots-vertical"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Another action</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Something else</a>
-                        <!-- item-->
-                        <a href="javascript:void(0);" class="dropdown-item">Separated link</a>
                     </div>
-                </div>
 
-                <h4 class="header-title mt-0 mb-3">Total Mitra</h4>
-
-                <div class="widget-box-2">
-                    <div class="widget-detail-2 text-right">
-                        {{-- <span class="badge badge-success badge-pill float-left mt-3">32% <i class="mdi mdi-trending-up"></i>
-                        </span> --}}
-                        <h2 class="font-weight-normal mb-1">{{ $total['mitra'] }}</h2>
-                        <p class="text-muted mb-3">Active Mitra</p>
-                    </div>
-                    <div class="progress progress-bar-alt-danger progress-sm">
-                        {{-- <div class="progress-bar bg-success" role="progressbar" aria-valuenow="77" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 77%;">
-                            <span class="sr-only">77% Complete</span>
-                        </div> --}}
-                    </div>
+                    <div class="clearfix"></div>
                 </div>
             </div>
-
-        </div><!-- end col -->
-
+        </div>
         <div class="col-xl-3 col-md-6">
             <div class="card-box">
                 <div class="dropdown float-right">
@@ -106,12 +76,7 @@
                         <h2 class="font-weight-normal mb-1"> {{ $total['acara'] }} </h2>
                         <p class="text-muted mb-3">Acara</p>
                     </div>
-                    <div class="progress progress-bar-alt-warning progress-sm">
-                        {{-- <div class="progress-bar bg-success" role="progressbar" aria-valuenow="77" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 77%;">
-                            <span class="sr-only">77% Complete</span>
-                        </div> --}}
-                    </div>
+
                 </div>
             </div>
 
@@ -144,12 +109,7 @@
                         <h2 class="font-weight-normal mb-1"> {{ rp(auth()->user()->saldo) }} </h2>
                         <p class="text-muted mb-3">Saldo</p>
                     </div>
-                    <div class="progress progress-bar-alt-success progress-sm">
-                        {{-- <div class="progress-bar bg-pink" role="progressbar" aria-valuenow="77" aria-valuemin="0"
-                            aria-valuemax="100" style="width: 77%;">
-                            <span class="sr-only">77% Complete</span>
-                        </div> --}}
-                    </div>
+
                 </div>
             </div>
 
@@ -159,45 +119,6 @@
     <!-- end row -->
     <!-- end row -->
 
-
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="dropdown float-right">
-                <a href="#" class="dropdown-toggle arrow-none card-drop" data-toggle="dropdown" aria-expanded="false">
-                    <i class="mdi mdi-dots-vertical"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <!-- item-->
-                    <a href="{{ url('users') }}" class="dropdown-item">See All</a>
-                </div>
-            </div>
-            {{-- <h4 class="header-title mt-0 mb-3">Mitra Project</h4> --}}
-        </div>
-        @forelse ($mitra as $item)
-            <div class="col-xl-3 col-md-6">
-                <div class="card-box widget-user">
-                    <div class="media">
-                        <div class="avatar-lg mr-3">
-                            <img src="{{ $item->profilePic() }}" class="img-fluid rounded-circle" alt="user">
-                        </div>
-                        <div class="media-body overflow-hidden">
-                            <h5 class="mt-0 mb-1">{{ $item->name }}</h5>
-                            <p class="text-muted mb-2 font-13 text-truncate">{{ $item->person . ' | ' . $item->phone }}
-                            </p>
-                            <small class="text-success"><b>{{ rp($item->user->saldo) }}</b></small>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end col -->
-        @empty
-            <div class="text-center">
-                <a href="" class="text-info"><i class="mdi mdi-spin mdi-loading mr-1"></i> Belum Ada
-                    Mitra
-                </a>
-            </div>
-        @endforelse
-
-    </div>
     <!-- end row -->
 
 
@@ -271,7 +192,7 @@
         <div class="col-xl-8">
             <div class="card-box">
 
-                <h4 class="header-title mt-0 mb-3">Acara Terbaru</h4>
+                <h4 class="header-title mt-0 mb-3">Undangan</h4>
 
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">

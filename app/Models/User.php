@@ -65,4 +65,7 @@ class User extends Authenticatable
     public function suport(){
         return $this->hasMany(Support::class);
     }
+    public function acara(){
+        return $this->hasMany(Acara::class);
+    }
 }

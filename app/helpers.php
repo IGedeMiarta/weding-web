@@ -9,6 +9,12 @@ function logoUrlSm(){
 function rp($harga){
     return 'Rp '.number_format($harga, 0, ',', '.');
 }
+function k($number){
+    if ($number >= 1000) {
+        $number = number_format($number/1000).'K';
+    }
+    return 'IDR '.$number;
+}
 function stsBayar($id){
     if($id==1){
         return 'Menunggu Bayar';
