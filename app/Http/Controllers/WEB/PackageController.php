@@ -42,13 +42,11 @@ class PackageController extends Controller
         $data['tile'] = 'Beli ' .$paket->name;
         $data['paket'] = $paket;
         $data['admin'] = User::find(1);
-        $currentYear = Carbon::now()->year;
-        $totalInv = Invoice::whereYear('created_at', $currentYear)->count();
-        $noInv = $totalInv < 1 ? 1:$totalInv+1; 
-        $trxm = 'INV/'.$currentYear.'/'.str_pad($noInv, 4, '0', STR_PAD_LEFT);
+        $inv = noInv();
+      
         $details = [
                 'id'    => $paket->id,
-                'trx'   => $trxm,
+                'trx'   => $inv,
                 'no'    => 1,
                 'item'  => $paket->name,
                 'desc'  => $paket->feature(),
@@ -69,7 +67,7 @@ class PackageController extends Controller
             try {
                 Invoice::create([
                     'user_id' => auth()->user()->id,
-                    'trx'     => $trxm,
+                    'trx'     => $inv,
                     'details' => json_encode($details),
                     'status'  => 1
                 ]);

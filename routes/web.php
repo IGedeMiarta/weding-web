@@ -6,6 +6,7 @@ use App\Http\Controllers\WEB\DashboardController;
 use App\Http\Controllers\WEB\InvoiceController;
 use App\Http\Controllers\WEB\MitraController;
 use App\Http\Controllers\WEB\PackageController;
+use App\Http\Controllers\WEB\PackageFieaturesController;
 use App\Http\Controllers\WEB\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,7 +37,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/post-acara',[AcaraController::class,'postAcara'])->name('acara.post');
     Route::get('detail-paket/{id}',[AcaraController::class,'paketDetail']);
+
     Route::resource('/paket',PackageController::class);
+    Route::resource('/fitur',PackageFieaturesController::class);
+
     Route::get('buy-paket',[PackageController::class,'buy']);
     Route::get('buy-paket/{id}',[PackageController::class,'buyPaket']);
     Route::get('pembayaran/',[PackageController::class,'bayar']);

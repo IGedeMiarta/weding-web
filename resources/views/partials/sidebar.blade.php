@@ -84,6 +84,7 @@
                         <li><a href="{{ url('buy-paket') }}"><i class="mdi mdi-minus"></i> Beli Paket</a></li>
                         @if (auth()->user()->id == 1)
                             <li><a href="{{ url('paket') }}"><i class="mdi mdi-minus"></i> Custom Paket</a></li>
+                            <li><a href="{{ url('fitur') }}"><i class="mdi mdi-minus"></i> Custom Fitur</a></li>
                         @endif
                     </ul>
                 </li>
