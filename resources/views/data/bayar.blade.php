@@ -2,7 +2,11 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
+
             <div class="card-box">
+                @if ($inv->status == 3 || $inv->status == 5)
+                    <div class="ribbon"><span>LUNAS</span></div>
+                @endif
                 <table class="body-wrap"
                     style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;"
                     bgcolor="#f6f6f6">
@@ -155,9 +159,21 @@
                     </div>
                 @else
                     <div class="text-center">
-                        <a href="" class="text-info"><i class="mdi mdi-spin mdi-loading mr-1"></i>
-                            {{ stsBayar($inv->status) }}
-                        </a>
+                        {{-- @if ($inv->status == 4)
+                            <a href="" class="text-success"><i class="mdi mdi-check mr-1 mt-3"></i>
+                                {{ stsBayar($inv->status) }}
+                            </a>
+                        @endif --}}
+                        @if ($inv->status == 3 || 5)
+                            <a href="" class="text-success"><i class="mdi mdi-check mr-1 mt-3"></i>
+                                {{ stsBayar($inv->status) }}
+                            </a>
+                        @endif
+                        @if ($inv->status == 4)
+                            <a href="" class="text-danger"><i class="mdi mdi-credit-card-off mr-1 mt-3"></i>
+                                {{ stsBayar($inv->status) }}
+                            </a>
+                        @endif
                     </div>
                 @endif
             </div>

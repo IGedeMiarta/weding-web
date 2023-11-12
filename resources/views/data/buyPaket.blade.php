@@ -6,7 +6,7 @@
                 @foreach ($paket as $p)
                     <!--Pricing Column-->
                     <article class="pricing-column col-md-4">
-                        @if ($p->id == 3)
+                        @if ($p->id == 2)
                             <div class="ribbon"><span>POPULAR</span></div>
                         @endif
                         <div class="inner-box card-box ">

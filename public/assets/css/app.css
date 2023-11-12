@@ -2816,7 +2816,7 @@ body.authentication-bg {
     margin-bottom: 15px;
     line-height: 24px; }
 
-.ribbon {
+.ribbon-success {
   position: absolute;
   left: 5px;
   top: -5px;
@@ -2825,7 +2825,7 @@ body.authentication-bg {
   width: 75px;
   height: 75px;
   text-align: right; }
-  .ribbon span {
+  .ribbon-sucess span {
     font-size: 10px;
     color: #fff;
     text-transform: uppercase;
@@ -2837,11 +2837,11 @@ body.authentication-bg {
     display: block;
     -webkit-box-shadow: 0 0px 8px 0 rgba(50, 58, 70, 0.06), 0 1px 0px 0 rgba(50, 58, 70, 0.02);
             box-shadow: 0 0px 8px 0 rgba(50, 58, 70, 0.06), 0 1px 0px 0 rgba(50, 58, 70, 0.02);
-    background: #71b6f9;
+    background: #10c469;
     position: absolute;
     top: 19px;
     left: -21px; }
-    .ribbon span:before {
+    .ribbon-success span:before {
       content: "";
       position: absolute;
       left: 0px;
@@ -2851,16 +2851,62 @@ body.authentication-bg {
       border-right: 3px solid transparent;
       border-bottom: 3px solid transparent;
       border-top: 3px solid #71b6f9; }
-    .ribbon span:after {
+    .ribbon-success span:after {
       content: "";
       position: absolute;
       right: 0px;
       top: 100%;
       z-index: -1;
       border-left: 3px solid transparent;
-      border-right: 3px solid #71b6f9;
+      border-right: 3px solid #10c469;
       border-bottom: 3px solid transparent;
-      border-top: 3px solid #71b6f9; }
+      border-top: 3px solid #10c469; }
+
+      .ribbon-success {
+  position: absolute;
+  left: 5px;
+  top: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 75px;
+  height: 75px;
+  text-align: right; }
+  .ribbon-success span {
+    font-size: 10px;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    -webkit-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+    width: 100px;
+    display: block;
+    -webkit-box-shadow: 0 0px 8px 0 rgba(50, 58, 70, 0.06), 0 1px 0px 0 rgba(50, 58, 70, 0.02);
+            box-shadow: 0 0px 8px 0 rgba(50, 58, 70, 0.06), 0 1px 0px 0 rgba(50, 58, 70, 0.02);
+    background: #10c469;
+    position: absolute;
+    top: 19px;
+    left: -21px; }
+    .ribbon-success span:before {
+      content: "";
+      position: absolute;
+      left: 0px;
+      top: 100%;
+      z-index: -1;
+      border-left: 3px solid #10c469;
+      border-right: 3px solid transparent;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid #10c469; }
+    .ribbon-success span:after {
+      content: "";
+      position: absolute;
+      right: 0px;
+      top: 100%;
+      z-index: -1;
+      border-left: 3px solid transparent;
+      border-right: 3px solid #10c469;
+      border-bottom: 3px solid transparent;
+      border-top: 3px solid #10c469; }
 
 .timeline {
   border-collapse: collapse;

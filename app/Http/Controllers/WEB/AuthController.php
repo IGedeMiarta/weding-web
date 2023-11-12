@@ -25,7 +25,7 @@ class AuthController extends Controller
         }
         if(Auth::attempt($request->only('username','password'))){
             $request->session()->regenerate();
-            return redirect()->intended('dashboard')->with('success','Selamat Datang');
+            return redirect()->intended('dashboard')->with('success','Selamat Datang '. $user->name);
         }
         return back()->with('error','Login Gagal');
 

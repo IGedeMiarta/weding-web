@@ -18,4 +18,18 @@ class InvoiceController extends Controller
         }
         return view('data.listInvoice',$data);
     }
+    public function details(Request $request){
+        $data['title'] = 'Invoice '. $request->inv;
+        $trx = $request->inv;
+        $inv = Invoice::where(['trx'=>$trx])->first();
+       
+        if(!$inv){
+            return back()->with('error','Invoice Not Found');
+        }
+        $data['trx'] = $trx;
+        $details = json_decode($inv->details,true);
+        $data['details'] = $details;
+        $data['inv'] = $inv;
+        return view('data.invoice',$data);
+    }
 }

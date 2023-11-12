@@ -1,7 +1,6 @@
 @extends('partials.master')
 @section('content')
     <div class="row">
-
         <div class="col-xl-3 col-md-6">
             <div class="card-box">
                 <div class="dropdown float-right">
@@ -184,17 +183,21 @@
                             <h5 class="mt-0 mb-1">{{ $item->name }}</h5>
                             <p class="text-muted mb-2 font-13 text-truncate">{{ $item->person . ' | ' . $item->phone }}
                             </p>
-                            <small class="text-success"><b>{{ rp($item->user->saldo) }}</b></small>
+                            <small class="text-success"><b>{{ rp($item->saldo) }}</b></small>
                         </div>
                     </div>
                 </div>
             </div><!-- end col -->
         @empty
-            <div class="text-center">
-                <a href="" class="text-info"><i class="mdi mdi-spin mdi-loading mr-1"></i> Belum Ada
-                    Mitra
-                </a>
-            </div>
+            <div class="col-xl-12 col-md-12">
+                <div class="card-box widget-user">
+                    <div class="text-center">
+                        <a href="" class="text-info"><i class="mdi mdi-spin mdi-loading mr-1"></i> Belum Ada
+                            Mitra
+                        </a>
+                    </div>
+                </div>
+            </div><!-- end col -->
         @endforelse
 
     </div>
@@ -299,15 +302,13 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr>
-                                    <td colspan="6">
-                                        <div class="text-center">
-                                            <a href="" class="text-info"><i
-                                                    class="mdi mdi-spin mdi-loading mr-1"></i>
-                                                Belum Ada
-                                                Undangan
-                                            </a>
-                                        </div>
+                                <tr class="text-center">
+                                    <td colspan="6 ">
+                                        <a href="" class="text-info "><i
+                                                class="mdi mdi-spin mdi-loading mr-1"></i>
+                                            Belum Ada
+                                            Undangan
+                                        </a>
                                     </td>
                                 </tr>
                             @endforelse
@@ -317,6 +318,15 @@
                 </div>
             </div>
         </div><!-- end col -->
-
     </div>
 @endsection
+@push('script')
+    <script>
+        $('#test').on('click', function() {
+            Toast.fire({
+                icon: 'success',
+                title: "Test",
+            })
+        })
+    </script>
+@endpush

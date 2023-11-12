@@ -8,6 +8,7 @@ use App\Models\Invoice;
 use App\Models\Package;
 use App\Models\Transaction;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,7 +42,10 @@ class PackageController extends Controller
         $data['tile'] = 'Beli ' .$paket->name;
         $data['paket'] = $paket;
         $data['admin'] = User::find(1);
-        $trxm = time();
+        $currentYear = Carbon::now()->year;
+        $totalInv = Invoice::whereYear('created_at', $currentYear)->count();
+        $noInv = $totalInv < 1 ? 1:$totalInv+1; 
+        $trxm = 'INV/'.$currentYear.'/'.str_pad($noInv, 4, '0', STR_PAD_LEFT);
         $details = [
                 'id'    => $paket->id,
                 'trx'   => $trxm,
@@ -79,13 +83,15 @@ class PackageController extends Controller
        return view('data.invoice',$data);
 
     }
-    public function bayar($id){
+    public function bayar(Request $request){
+        $trx = $request->input('inv');
         $data['title'] = 'Lanjut Pembayaran';
-        $inv = Invoice::where(['trx'=>$id])->first();
+        $inv = Invoice::where(['trx'=>$trx])->first();
+       
         if(!$inv){
             return back()->with('error','Invoice Not Found');
         }
-        $data['trx'] = $id;
+        $data['trx'] = $trx;
         $details = json_decode($inv->details,true);
         $data['details'] = $details;
         $data['inv'] = $inv;
@@ -93,10 +99,13 @@ class PackageController extends Controller
     }
 
     public function bukti(Request $request){
+        // dd($request->all());
+
         $update = [];
         if($request->file('bukti')){
             $file= $request->file('bukti');
-            $filename= strtolower($request->trx).'.'.$file->getClientOriginalExtension();
+            $changename = str_replace('/', '_', $request->trx);
+            $filename= strtolower($changename).'.'.$file->getClientOriginalExtension();
             $path = 'images/transfer/';
             $file->move(public_path($path), $filename);
             $imgSave = $path.$filename;
@@ -104,6 +113,7 @@ class PackageController extends Controller
             $update['status'] = 2;
         }
         $inv = Invoice::where('trx',$request->trx)->first();
+        // dd($inv);
         DB::beginTransaction();
         try {
             if(isset($request->status) && auth()->user()->id == 1){

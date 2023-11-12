@@ -1,4 +1,5 @@
 <?php
+
 function logoUrl()
 {
     return asset('assets/images/logo-dark.png');
@@ -6,6 +7,7 @@ function logoUrl()
 function logoUrlSm(){
     return asset('assets/images/logo-sm.png');
 }
+
 function rp($harga){
     return 'Rp '.number_format($harga, 0, ',', '.');
 }
@@ -20,6 +22,8 @@ function stsBayar($id){
         return 'Menunggu Bayar';
     }elseif($id==2){
         return 'Menunggu Konfirmasi';
+    }elseif($id ==4){
+         return 'Pembayaran Ditolak';
     }else{
          return 'Pembayaran Berhasil';
     }

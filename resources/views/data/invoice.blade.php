@@ -3,17 +3,20 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card-box">
+                @if ($inv->status == 3 || $inv->status == 5)
+                    <div class="ribbon"><span>LUNAS</span></div>
+                @endif
                 <!-- <div class="panel-heading">
-                                                                                                                                                                                                                                                                                        <h4>Invoice</h4>
-                                                                                                                                                                                                                                                                                    </div> -->
+                                                                                                                                                                                                                                                                                                                                                                                    <h4>Invoice</h4>
+                                                                                                                                                                                                                                                                                                                                                      </div> -->
                 <div class="panel-body">
                     <div class="clearfix">
                         <div class="float-left">
                             <h3>{{ env('APP_NAME') }}</h3>
                         </div>
                         <div class="float-right">
-                            <h4>Invoice # <br>
-                                <strong>{{ $details['trx'] }}</strong>
+                            <h4>Invoice :<br>
+                                <strong class="text-secondary">{{ $details['trx'] }}</strong>
                             </h4>
                         </div>
                     </div>
@@ -25,10 +28,10 @@
 
                             </div>
                             <div class="float-right mt-3">
-                                <p><strong>Order Date: </strong> Jan 17, 2016</p>
+                                <p><strong>Order Date:</strong> {{ date('H:i d M Y', strtotime($inv->created_at)) }}</p>
                                 <p class="m-t-10"><strong>Order Status: </strong> <span
-                                        class="label label-pink">Pending</span></p>
-                                <p class="m-t-10"><strong>Order ID: </strong> #{{ $details['trx'] }}</p>
+                                        class="label label-pink">{{ stsBayar($inv->status) }}</span></p>
+                                <p class="m-t-10"><strong>Order ID: </strong> {{ $details['trx'] }}</p>
                             </div>
                         </div><!-- end col -->
                     </div>
@@ -89,9 +92,12 @@
                         <div class="text-center">
                             <a href="javascript:window.print()" class="btn btn-info waves-effect waves-light"><i
                                     class="fa fa-print"></i> Print</a>
-                            <a href="{{ url('pembayaran/' . $details['trx']) }}"
-                                class="btn btn-success waves-effect waves-light"><i class="fa fa-check"></i> Lajuat
-                                Pembayaran</a>
+                            @if ($inv->status <= 2)
+                                <a href="{{ url('pembayaran?inv=' . $details['trx']) }}"
+                                    class="btn btn-success waves-effect waves-light"><i class="fa fa-check"></i> Lajuat
+                                    Pembayaran</a>
+                            @endif
+
                             {{-- <a href="http://wa.me/{{ $admin->phone }}?text=hai, saya mau bayar pembelian {{ env('APP_NAME') . ' ' . $details['item'] }} bisa dibantu?"
                                 class="btn btn-success waves-effect waves-light">
                                 <i class="mdi mdi-whatsapp" aria-hidden="true"></i> Chat Admin</a> --}}

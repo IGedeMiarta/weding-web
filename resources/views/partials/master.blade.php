@@ -9,7 +9,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('') }}assets/images/favicon.ico">
+    <link rel="shortcut icon" href="{{ asset('') }}assets/images/logo-sm.png">
 
     <!-- third party css -->
     <link href="{{ asset('') }}assets/libs/datatables/dataTables.bootstrap4.css" rel="stylesheet" type="text/css" />
@@ -30,7 +30,11 @@
     <link href="{{ asset('') }}assets/css/app.min.css" id="app-stylesheet" rel="stylesheet" type="text/css" />
     <script src="{{ asset('') }}assets/js/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="{{ asset('') }}assets/css/sweetalert2.min.css">
-
+    <style>
+        .swalPostion {
+            margin-top: 60px;
+        }
+    </style>
 
 </head>
 
@@ -99,7 +103,7 @@
     <script src="{{ asset('') }}assets/libs/jquery-knob/jquery.knob.min.js"></script>
 
     <!--Morris Chart-->
-    {{-- <script src="{{ asset('') }}assets/libs/morris-js/morris.min.js"></script> --}}
+    <script src="{{ asset('') }}assets/libs/morris-js/morris.min.js"></script>
     <script src="{{ asset('') }}assets/libs/raphael/raphael.min.js"></script>
 
     <!-- Dashboard init js-->
@@ -124,7 +128,6 @@
     <!-- Datatables init -->
     <script src="{{ asset('') }}assets/js/pages/datatables.init.js"></script>
 
-    @stack('script')
     <script>
         const Toast = Swal.mixin({
             toast: true,
@@ -132,6 +135,9 @@
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
+            customClass: {
+                container: 'swalPostion',
+            },
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -145,11 +151,13 @@
             })
         })
     </script>
+    @stack('script')
+
     @if (session()->has('success'))
         <script>
             Toast.fire({
                 icon: 'success',
-                title: "{{ session()->get('success') }}"
+                title: "{{ session()->get('success') }}",
             })
         </script>
     @endif
@@ -161,6 +169,7 @@
             })
         </script>
     @endif
+
 </body>
 
 </html>

@@ -15,7 +15,8 @@ class DashboardController extends Controller
     public function home(){
         $data['title'] = 'Dashboard';
         if(auth()->user()->id == 1){
-            $data['mitra'] = Mitra::limit(4)->get();
+            $data['mitra'] = User::join('mitras','users.mitra_id','=','mitras.id')->orderByDesc('saldo')->limit(4)->get();
+            // dd($data);
             $data['inbox'] = Support::limit(5)->get();
             $data['acara'] = Acara::all();
             $data['total'] = [

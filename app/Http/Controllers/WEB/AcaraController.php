@@ -35,6 +35,9 @@ class AcaraController extends Controller
     public function addAcara(){
         $data['title'] = 'Buat Undangan';
         $inv           = Invoice::where(['user_id'=>auth()->user()->id,'status'=>3])->first();
+        if(!$inv){
+            return redirect()->intended('/undang-tamu')->with('error','Kuota Untuk Membuat Acara Habis');
+        }
         $data['inv']   = $inv;
         $data['paket'] = Package::where('id',$inv->details()['id'])->get();
         $data['img']   = Package::find($inv->details()['id']);
@@ -102,7 +105,7 @@ class AcaraController extends Controller
             }
             $inv->update(['status'=>5]);
             DB::commit();
-            return redirect()->back()->with('success','Data Save');
+            return redirect()->intended('/undangan')->with('success','Data Save');
         } catch (\Throwable $th) {
             DB::rollBack();
             // return redirect()->back()->with('error','Data Error:' .$th->getMessage());

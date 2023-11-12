@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/w',function(){
+    return view('welcome');
+});
 Route::get('/',function(){
     return redirect()->intended('/login');
 });
@@ -36,17 +39,16 @@ Route::middleware('auth')->group(function () {
     Route::resource('/paket',PackageController::class);
     Route::get('buy-paket',[PackageController::class,'buy']);
     Route::get('buy-paket/{id}',[PackageController::class,'buyPaket']);
-    Route::get('pembayaran/{id}',[PackageController::class,'bayar']);
-    Route::post('pembayaran/{id}',[PackageController::class,'bukti']);
+    Route::get('pembayaran/',[PackageController::class,'bayar']);
+    Route::post('pembayaran/',[PackageController::class,'bukti']);
 
     Route::get('invoice',[InvoiceController::class,'index'])->name('invoice');
+    Route::get('invoice-details',[InvoiceController::class,'details'])->name('invoice.details');
     
     Route::resource('/mitra',MitraController::class);
     Route::get('/users',[UserController::class,'allUser'])->name('user.all');
     Route::get('/users/profile/{id}',[UserController::class,'profile'])->name('user.profile');
     Route::post('/users/suport/{id}',[UserController::class,'suport'])->name('user.suport');
-
-    
     Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 });
 

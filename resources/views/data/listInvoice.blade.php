@@ -28,15 +28,20 @@
                                     <td>{{ $key->details()['item'] }}</td>
                                     <td>{{ rp($key->details()['total']) }}</td>
                                     <td><span
-                                            class="badge {{ $key->status != 3 ? 'badge-warning' : 'badge-success' }}">{{ stsBayar($key->status) }}</span>
+                                            class="badge @if ($key->status == 4) badge-danger
+                                            @elseif($key->status <= 2)
+                                                badge-warning
+                                                @else
+                                                badge-success @endif">{{ stsBayar($key->status) }}</span>
                                     </td>
                                     <td>
-                                        <a href="{{ url('pembayaran/' . $key->trx) }}" class="btn btn-info"> <i
-                                                class="fas fa-print"></i> Invoice</a>
+
                                         @if (auth()->user()->id == 1 && $key->status == 2)
-                                            <a href="{{ url('pembayaran/' . $key->trx) }}" class="btn btn-primary"> <i
+                                            <a href="{{ url('pembayaran?inv=' . $key->trx) }}" class="btn btn-primary"> <i
                                                     class="fas fa-edit"></i> Validasi Bayar</a>
                                         @endif
+                                        <a href="{{ url('invoice-details?inv=' . $key->trx) }}" class="btn btn-info"> <i
+                                                class="fas fa-print"></i> Details</a>
                                     </td>
                                 </tr>
                             @endforeach

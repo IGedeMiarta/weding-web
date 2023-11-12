@@ -175,7 +175,7 @@
     <div class="logo-box">
         <a href="{{ url('') }}" class="logo logo-dark text-center">
             <span class="logo-lg">
-                <img src="{{ logoUrl() }}" alt="" height="16">
+                <img src="{{ logoUrl() }}" alt="" height="35">
             </span>
             <span class="logo-sm">
                 <img src="{{ logoUrlSm() }}" alt="" height="24">
